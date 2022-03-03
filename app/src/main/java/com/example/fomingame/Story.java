@@ -12,8 +12,7 @@ public class Story {
         badReputation = new Situation("Вас ненавидят", "", "Вы сделали столько плохих дел, что " +
                 "люди решили убить вас.", new Statistics());
 
-    public Story(Character player, Situation start) {
-        questQueue.add(start);
+    public Story(Character player) {
         this.player = player;
     }
 
