@@ -16,20 +16,21 @@ public class Story {
         this.player = player;
     }
 
-    public void choose(int number) {
-        choose(number, false);
+    public Situation choose(int number) {
+        return choose(number, false);
     }
 
-    public void choose(int number, boolean addToTail) {
+    public Situation choose(int number, boolean addToTail) {
+        if (isEnd()) return null;
         Situation current = getCurrentSituation();
         if (number < 0 || number >= current.options.size())
-            return;
+            return null;
         addQuest(current.options.get(number), addToTail);
-        nextQuest();
+        return nextQuest();
     }
 
     public Situation getCurrentSituation() {
-        return questQueue.getFirst();
+        return isEnd() ? null : questQueue.getFirst();
     }
 
     public void addQuest(Situation situation) {
@@ -45,6 +46,10 @@ public class Story {
 
     public Situation nextQuest() {
         questQueue.poll();
+
+        if (player.stat.strength <= -1) {
+            questQueue.clear();
+        }
 
         if (player.stat.money <= 0) {
             questQueue.clear();
@@ -62,6 +67,7 @@ public class Story {
 
     public void doQuest() {
         getCurrentSituation().action(player);
-        player.stat.add(getCurrentSituation().statChange);
+        if (!isEnd())
+            player.stat.add(getCurrentSituation().statChange);
     }
 }

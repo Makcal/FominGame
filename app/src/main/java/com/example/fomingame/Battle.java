@@ -45,6 +45,7 @@ public class Battle extends Situation {
         else {
             result = "Монстр " + monsterName + " победил вас.\nВы умерли.";
             statChange = new Statistics();
+            player.stat.strength = -1;
         }
     }
 }
