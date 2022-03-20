@@ -37,6 +37,7 @@ public class Battle extends Situation {
 
     @Override
     public void action(Character player) {
+        super.action(player);
         if (intro) return;
         if (player.stat.strength >= requiredStrength) {
             result = "Вы победили монстра " + monsterName + "!\n" + result;

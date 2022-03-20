@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         // создаем нового персонажа и историю
         Statistics initials = new Statistics(100, 0, 0, 1);
         player = new Character("Вася", initials);
-        ((TextView)findViewById(R.id.name)).setText(String.format("%s - %d дней.", player.name, player.life));
 
         story = new Story(player);
         Situation.story = story;
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     // позволят пользователю выбрать дальнейший ход событий
     private void updateStatus() {
         // выводим статус на форму
+        ((TextView)findViewById(R.id.name)).setText(String.format("%s", player.name));
         ((TextView) findViewById(R.id.status)).
                 setText(String.format("Деньги: %d\nВласть: %d\nРепутация: %d\nСила: %d", player.stat.money, player.stat.power, player.stat.reputation, player.stat.strength));
 
